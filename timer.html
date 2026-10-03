@@ -106,7 +106,7 @@
   .main-btns { display: flex; gap: 8px; }
   #startBtn { width: 96px; font-size: 18px; color: #fff; background: var(--navy); box-shadow: none; }
   #startBtn:hover { background: #1E3A66; }
-  #resetBtn, #fsBtn { font-size: 20px; }
+  #resetBtn, #zeroBtn, #fsBtn { font-size: 20px; }
   .icon { display: block; margin: auto; }
 </style>
 </head>
@@ -143,6 +143,7 @@
       <div class="main-btns">
         <button id="startBtn" title="開始 / 一時停止（Space）">START</button>
         <button id="resetBtn" title="リセット（R）">↺</button>
+        <button id="zeroBtn" title="ゼロリセット（0）">0</button>
         <button id="fsBtn" title="全画面（F）">⛶</button>
       </div>
     </div>
@@ -155,6 +156,7 @@
   const startBtn = document.getElementById('startBtn');
   const resetBtn = document.getElementById('resetBtn');
   const fsBtn = document.getElementById('fsBtn');
+  const zeroBtn = document.getElementById('zeroBtn');
   const adjBtns = document.querySelectorAll('.adj');
 
   let setSeconds = 5 * 60;      // 設定時間
@@ -216,7 +218,8 @@
       display.innerHTML = fmt(sec);
       lastShown = sec;
     }
-    display.classList.toggle('red', sec <= 10);
+    const zeroIdle = sec === 0 && !finished; // ゼロリセット直後はネイビー
+    display.classList.toggle('red', sec <= 10 && !zeroIdle);
     display.classList.toggle('yellow', sec > 10 && sec <= 60);
     display.classList.toggle('done', finished);
   }
@@ -266,6 +269,16 @@
     render(shownSeconds());
     releaseWake();
   }
+  // 停止して 00:00 に戻す（設定時間もクリア）
+  function zeroReset() {
+    cancelAnimationFrame(rafId);
+    running = false; finished = false;
+    setSeconds = 0; remainingMs = 0;
+    try { localStorage.setItem('presenTimer.set', '0'); } catch (e) {}
+    updateUI();
+    render(0);
+    releaseWake();
+  }
   function adjust(step) {
     if (running) return;
     const base = finished ? setSeconds : shownSeconds();
@@ -305,6 +318,7 @@
 
   startBtn.addEventListener('click', () => running ? pause() : start());
   resetBtn.addEventListener('click', reset);
+  zeroBtn.addEventListener('click', zeroReset);
   fsBtn.addEventListener('click', toggleFs);
 
   function toggleFs() {
@@ -312,11 +326,12 @@
     else document.exitFullscreen();
   }
 
-  // キーボード：Space=開始/停止, R=リセット, F=全画面, ↑↓=分, ←→=秒
+  // キーボード：Space=開始/停止, R=リセット, 0=ゼロリセット, F=全画面, ↑↓=分, ←→=秒
   document.addEventListener('keydown', e => {
     if (e.code === 'Space') { e.preventDefault(); running ? pause() : start(); }
     else if (e.key === 'r' || e.key === 'R') reset();
     else if (e.key === 'f' || e.key === 'F') toggleFs();
+    else if (e.key === '0') zeroReset();
     else if (e.key === 'ArrowUp') { e.preventDefault(); adjust(60); }
     else if (e.key === 'ArrowDown') { e.preventDefault(); adjust(-60); }
     else if (e.key === 'ArrowRight') adjust(1);
