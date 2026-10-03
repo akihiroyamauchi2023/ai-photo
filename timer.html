@@ -67,11 +67,7 @@
     white-space: nowrap;
   }
   #display .colon { display: inline-block; transform: translateY(-0.06em); margin: 0 -0.02em; }
-  #display.yellow {
-    color: var(--yellow);
-    /* 白背景でも黄色が読めるよう細い輪郭を付与 */
-    -webkit-text-stroke: 0.012em rgba(120, 85, 0, 0.55);
-  }
+  #display.yellow { color: var(--yellow); }
   #display.red { color: var(--red); }
   #display.done { animation: blink 1s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0.15; } }
