@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>高畑駅前接骨院 スマホナビ案</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 左に説明、右にスマホ実寸フレーム。スマホ閲覧時はフレームを外して全幅で操作 */
+:root {
+  --page: #eef1ee;
+  --ink: #26302b;
+  --muted: #5d6a63;
+  --line: #d3dad5;
+  --panel: #ffffff;
+  --accent: #0a8f6a;
+  --f-disp: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", sans-serif;
+  --f-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+
+  /* モック内（実サイト想定色・テーマ非依存） */
+  --s-bg: #ffffff;
+  --s-ink: #333333;
+  --s-sub: #f6f3e8;
+  --s-brand: #1e7a4c;
+  --s-red: #c4001a;
+  --s-yellow: #fff35c;
+  --s-line: #06c755;
+  --s-bar: rgba(80,80,80,.95);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --page: #161a18; --ink: #e5ebe7; --muted: #9eaba4; --line: #2f3833; --panel: #1f2522; --accent: #3fc79a; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --page: #161a18; --ink: #e5ebe7; --muted: #9eaba4; --line: #2f3833; --panel: #1f2522; --accent: #3fc79a; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.7; }
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; align-items: start;
+}
+.intro { min-width: 0; position: sticky; top: calc(24px + env(safe-area-inset-top, 0px)); }
+.eyebrow { font-size: 12px; letter-spacing: .14em; color: var(--accent); font-weight: 700; }
+h1 { font-family: var(--f-disp); font-weight: 800; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.3; margin: 6px 0 16px; text-wrap: balance; }
+.lead { color: var(--muted); max-width: 34em; margin: 0 0 24px; }
+
+.toggle { display: inline-grid; grid-template-columns: 1fr 1fr; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin-bottom: 24px; }
+.toggle button { font: 700 14px var(--f-body); border: 0; background: none; color: var(--muted); padding: 10px 22px; border-radius: 999px; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--page); }
+.toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.points { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.points li { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 10px; }
+.points .k { width: 28px; height: 28px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--accent); }
+.points b { display: block; }
+.points span { color: var(--muted); font-size: 14px; }
+.hint { margin-top: 22px; font-size: 13px; color: var(--muted); }
+
+/* ---------- スマホフレーム ---------- */
+.phone {
+  width: 400px; height: 820px; border-radius: 52px; padding: 12px;
+  background: #121212; box-shadow: 0 30px 60px -20px rgba(0,0,0,.35), inset 0 0 0 2px #2a2a2a;
+  position: relative;
+}
+.phone::before { content: ""; position: absolute; top: 22px; left: 50%; translate: -50% 0; width: 110px; height: 30px; background: #000; border-radius: 20px; z-index: 50; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 40px; overflow: hidden; background: var(--s-bg); color: var(--s-ink); }
+.scroll { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; padding-top: 44px; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+.screen.after .scroll { padding-bottom: 120px; }
+.screen.before .scroll { padding-bottom: 70px; }
+
+/* ---------- モックサイト本文 ---------- */
+.s-head { padding: 10px 14px 8px; display: flex; align-items: center; gap: 10px; border-bottom: 3px solid var(--s-brand); }
+.s-logo-mark { width: 38px; height: 38px; border-radius: 50%; background: var(--s-brand); color: #fff; display: grid; place-items: center; font: 800 15px var(--f-disp); flex: none; }
+.s-logo { font: 800 17px/1.2 var(--f-disp); color: var(--s-brand); }
+.s-logo small { display: block; font: 500 10px var(--f-body); color: #666; letter-spacing: .04em; }
+.s-time { display: flex; justify-content: space-between; align-items: center; background: var(--s-sub); padding: 8px 14px; font-size: 11px; }
+.s-time b { color: var(--s-red); font-size: 15px; letter-spacing: .02em; }
+.s-hero {
+  height: 230px; position: relative; display: grid; align-content: end; padding: 18px;
+  background:
+    radial-gradient(120% 90% at 85% 10%, rgba(255,255,255,.35), transparent 60%),
+    linear-gradient(160deg, #2f8f5f 0%, #1e6a46 55%, #134a31 100%);
+  color: #fff;
+}
+.s-hero p { margin: 0; font: 800 23px/1.45 var(--f-disp); text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+.s-hero small { display: inline-block; margin-top: 8px; background: var(--s-yellow); color: #333; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; width: fit-content; }
+.s-sec { padding: 26px 16px; }
+.s-sec.alt { background: var(--s-sub); }
+.s-h2 { font: 800 18px/1.4 var(--f-disp); text-align: center; margin: 0 0 16px; color: var(--s-brand); }
+.s-h2 em { font-style: normal; color: var(--s-red); }
+.s-feat { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.s-feat div { background: #fff; border: 2px solid #e7e0c7; border-radius: 10px; padding: 10px; font-size: 12px; font-weight: 700; line-height: 1.5; }
+.s-feat i { display: block; font-style: normal; font: 800 18px var(--f-disp); color: var(--s-brand); }
+.s-promise { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 13px; }
+.s-promise li { background: #fff; border-left: 4px solid var(--s-brand); padding: 8px 10px; }
+.s-price { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+.s-price th, .s-price td { border: 1px solid #ddd; padding: 8px; }
+.s-price th { background: #e9f3ec; width: 40%; text-align: left; }
+.s-note { font-size: 10px; color: #777; margin: 6px 0 0; }
+.s-voice { display: grid; gap: 8px; }
+.s-voice div { background: #fff; border-radius: 10px; padding: 10px 12px; font-size: 13px; box-shadow: 0 1px 0 #e5e0cc; }
+.s-voice b { display: block; color: var(--s-brand); }
+.s-info { font-size: 13px; }
+.s-info p { margin: 0 0 6px; }
+.s-foot { background: #2b2b2b; color: #bbb; font-size: 10px; text-align: center; padding: 14px; }
+.s-price-btn { position: absolute; right: 12px; width: 64px; height: 64px; border-radius: 50%; background: var(--s-red); color: #fff; display: grid; place-items: center; text-align: center; font: 800 11px/1.25 var(--f-disp); box-shadow: 0 4px 10px rgba(0,0,0,.25); z-index: 5; border: 3px solid #fff; transition: bottom .25s; }
+.screen.after .s-price-btn { bottom: 128px; }
+.screen.before .s-price-btn { bottom: 80px; }
+
+/* ---------- 実サイト構成の再現用（画像は差し替え枠） ---------- */
+.ph {
+  display: grid; place-items: center; text-align: center; gap: 2px;
+  background: repeating-linear-gradient(135deg, #f1efe6 0 10px, #e9e6da 10px 20px);
+  border: 1px dashed #c9c3ad; color: #6c6552; font-size: 12px; font-weight: 700; line-height: 1.4; padding: 8px;
+}
+.ph small { font-size: 9px; font-weight: 500; color: #9a937d; }
+.s-htext { margin: 0; padding: 6px 12px 0; font-size: 9px; line-height: 1.5; color: #777; }
+.s-timebox { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 8px 12px; background: var(--s-sub); }
+.s-tb-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.s-tb-btns span { display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; border-radius: 4px; }
+.b-line { background: var(--s-line); } .b-acc { background: #f39800; }
+.ph-sm { min-height: 48px; }
+.s-yoru { color: var(--s-red); }
+.ph-hero { height: 240px; border-left: 0; border-right: 0; font-size: 14px; }
+.s-gnav { display: flex; overflow-x: auto; gap: 0; background: var(--s-brand); scrollbar-width: none; }
+.s-gnav::-webkit-scrollbar { display: none; }
+.s-gnav a { flex: none; color: #fff; text-decoration: none; font-size: 12px; font-weight: 700; padding: 10px 12px; border-right: 1px solid rgba(255,255,255,.25); }
+.s-pad { padding: 14px 16px; }
+.ph-banner { min-height: 72px; border-radius: 6px; }
+.ph-title { min-height: 56px; margin-bottom: 14px; font-size: 14px; }
+.s-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ph-card { aspect-ratio: 1; border-radius: 8px; font-size: 11px; }
+.ph-wide { height: 140px; border-left: 0; border-right: 0; }
+.s-row { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.ph-lic { flex: none; width: 110px; height: 76px; }
+.s-promise { margin: 0 0 16px; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 13px; }
+.s-promise li { background: #fff; border-left: 4px solid var(--s-brand); padding: 10px 12px; }
+.s-promise b { color: var(--s-brand); margin-right: 4px; }
+.s-btn { display: block; width: fit-content; margin: 14px auto 0; padding: 10px 28px; border-radius: 999px; background: var(--s-brand); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; }
+.s-banners { display: grid; gap: 8px; padding: 14px 16px; }
+.s-red { background: #fde9ec; border-color: #e7a5ae; color: var(--s-red); }
+.s-grn { background: #e3f8eb; border-color: #9fd9b6; color: #108a44; }
+.s-loop { display: flex; gap: 6px; overflow: hidden; padding: 8px 0; }
+.s-loop .ph { flex: none; width: 120px; height: 90px; font-size: 10px; }
+.ph-circle { aspect-ratio: 1; border-radius: 50%; font-size: 12px; }
+.s-trouble .ph-circle:last-child { grid-column: 1 / -1; width: 50%; justify-self: center; }
+.s-center { text-align: center; }
+.s-center p { font-size: 13px; line-height: 1.9; }
+.s-p { font-size: 13px; line-height: 1.85; margin: 0 0 12px; }
+.s-p b { background: linear-gradient(transparent 60%, #fff35c 60%); }
+.ph-mid { height: 150px; }
+.s-strong { font: 800 16px/1.6 var(--f-disp) !important; color: var(--s-brand); }
+.s-eng { text-align: center; font: 800 11px var(--f-disp); letter-spacing: .2em; color: #b5a77a; }
+.s-slider { display: grid; grid-auto-flow: column; grid-auto-columns: 82%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: none; }
+.s-slider::-webkit-scrollbar { display: none; }
+.s-slider > * { scroll-snap-align: start; background: #fff; border-radius: 10px; padding: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: 12px; display: grid; gap: 6px; align-content: start; }
+.s-vhead { font: 800 14px/1.4 var(--f-disp); color: var(--s-brand); }
+.ph-photo { height: 130px; }
+.s-cat { justify-self: start; font-size: 10px; background: var(--s-sub); padding: 2px 8px; border-radius: 999px; }
+.s-vcard small, .s-rcard small, .s-staff small, .s-media small { color: #888; font-size: 10px; }
+.s-symttl { font: 800 16px var(--f-disp); color: var(--s-brand); margin-bottom: 8px; }
+.s-sym { margin: 0; font-size: 13px; }
+.s-sym dt { font-weight: 700; padding: 8px 0 4px; border-bottom: 2px solid var(--s-brand); }
+.s-sym dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; }
+.s-sym a { color: var(--s-ink); text-decoration: none; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; font-size: 12px; }
+.s-rttl { font: 800 14px/1.4 var(--f-disp); color: var(--s-brand); }
+.s-rcard p { margin: 0; line-height: 1.7; }
+.s-slider:has(.s-staff) { grid-auto-columns: 46%; }
+.ph-sq { aspect-ratio: 1; border-radius: 50%; }
+.s-staff b { text-align: center; } .s-staff small { text-align: center; }
+.s-balloon { width: fit-content; margin: 0 auto 8px; background: #fff; border: 2px solid var(--s-brand); border-radius: 999px; padding: 4px 14px; font-size: 11px; font-weight: 700; color: var(--s-brand); }
+.s-diff i { justify-self: start; font: 800 16px var(--f-disp); font-style: normal; background: var(--s-brand); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; }
+.s-diff b { font: 800 14px/1.45 var(--f-disp); color: var(--s-brand); }
+.s-other { background: #f2f2f2; border-radius: 6px; padding: 6px 8px; font-size: 11px; color: #666; }
+.s-other span { display: block; font-weight: 700; color: #999; font-size: 10px; }
+.s-diff p { margin: 0; line-height: 1.7; }
+.s-diff mark { background: linear-gradient(transparent 60%, #fff35c 60%); color: inherit; }
+.s-movies { display: grid; gap: 14px; }
+.ph-video { aspect-ratio: 16/9; background: #222; border-color: #444; color: #fff; font-size: 14px; }
+.s-movies small { display: block; font-size: 11px; margin-top: 4px; line-height: 1.5; }
+.ph-book { height: 140px; }
+.s-media b { line-height: 1.5; }
+.s-tags { list-style: none; display: flex; gap: 6px; padding: 0; margin: 0 0 10px; justify-content: center; }
+.s-tags li { background: var(--s-brand); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.s-price td small { font-size: 10px; }
+.s-h3 { font: 800 15px var(--f-disp); color: var(--s-brand); text-align: center; margin: 18px 0 8px; }
+.s-ps { font-size: 12px !important; line-height: 2 !important; }
+.s-posts { display: grid; gap: 10px; }
+.s-posts a { display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 10px; color: var(--s-ink); text-decoration: none; font-size: 12px; line-height: 1.5; }
+.s-posts small { display: block; color: #888; font-size: 10px; margin-top: 4px; }
+.ph-thumb { height: 64px; font-size: 10px; }
+.s-info { font-size: 13px; }
+.s-info p { margin: 0 0 8px; }
+.ph-map { height: 200px; border-left: 0; border-right: 0; }
+.s-shop { font: 800 18px var(--f-disp); color: var(--s-brand); margin-bottom: 6px; }
+.s-contact { background: var(--s-sub); border-radius: 8px; padding: 10px; margin: 8px 0; display: grid; gap: 2px; text-align: center; }
+.s-contact span { font-size: 11px; } .s-contact b { font-size: 20px; color: var(--s-red); } .s-contact small { font-size: 11px; }
+.s-series { background: #fff; border-radius: 8px; padding: 12px; margin-bottom: 10px; display: grid; gap: 4px; font-size: 11px; }
+.s-series span { color: var(--s-red); font-weight: 700; }
+.s-series b { font: 800 15px var(--f-disp); color: var(--s-brand); }
+.s-series small { color: #555; line-height: 1.6; }
+.s-group { font-weight: 700; margin: 14px 0 0; }
+.s-fnav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 12px; padding: 14px; background: #3a3a3a; }
+.s-fnav a { color: #ddd; font-size: 11px; text-decoration: none; }
+
+/* ---------- 実画像用 ---------- */
+.ri { display: block; max-width: 100%; height: auto; }
+.s-head .r-hic { height: 42px; width: auto; }
+.s-head .r-logo { height: 34px; width: auto; }
+.s-timebox .ri, .r-btns .ri { width: 100%; }
+.r-btns a { display: block; }
+.r-hero { position: relative; background: var(--s-brand); }
+.r-hero-bg { width: 100%; height: 240px; object-fit: cover; }
+.r-hero-fix { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; }
+.r-title { margin: 0 auto 14px; }
+.s-grid2 .ri, .s-banners .ri, .s-pad .ri { width: 100%; }
+.r-wide { width: 100%; height: 160px; object-fit: cover; }
+.r-lic { flex: none; height: 76px; width: auto; }
+.s-loop .r-loop { flex: none; width: 140px; }
+.s-trouble .ri:last-child { grid-column: 1 / -1; width: 50%; justify-self: center; }
+.r-mid { margin: 0 auto; max-height: 220px; }
+.r-photo { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; }
+.r-staff { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.r-diff { width: 100%; }
+.r-yt { position: relative; display: block; }
+.r-yt .ri { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.r-yt::after { content: "▶"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 34px; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+.r-book { height: 150px; width: auto; margin: 0 auto; }
+.r-thumb { width: 96px; height: 64px; object-fit: cover; }
+.r-map { width: 100%; height: 220px; border: 0; display: block; }
+.r-slogo { max-height: 46px; width: auto; }
+.r-sphoto { width: 100%; border-radius: 6px; }
+.s-price-btn.r-pricebtn { background: none; border: 0; box-shadow: none; width: 72px; height: 72px; }
+.r-pricebtn .ri { width: 100%; }
+.old-menu.r-oldmenu { width: 60px; }
+.r-oldmenu .ri { width: 60px; }
+.old-bar.r-oldbar { display: flex; height: auto; align-items: flex-end; }
+.r-oldbar .ri { flex: 1 1 0; min-width: 0; width: 100%; }
+.ph.r-fail { min-height: 60px; }
+
+/* ---------- BEFORE：既存の右上MENU＋下部画像バナー ---------- */
+.old-menu { position: absolute; top: 50px; right: 10px; z-index: 8; display: grid; gap: 4px; }
+.old-menu span { width: 54px; height: 50px; border-radius: 8px; background: var(--s-brand); color: #fff; display: grid; place-items: center; font: 700 10px/1.1 var(--f-body); text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+.old-menu span:last-child { background: #f39800; }
+.old-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 8; display: grid; grid-template-columns: 1.4fr 1fr; height: 64px; }
+.old-bar div { display: grid; place-items: center; text-align: center; font: 800 13px/1.3 var(--f-disp); color: #fff; }
+.old-bar div:first-child { background: linear-gradient(#e7334a, var(--s-red)); }
+.old-bar div:last-child { background: var(--s-line); }
+.old-bar small { display: block; font-size: 10px; font-weight: 500; }
+
+/* ---------- AFTER：新ナビ（提案） ---------- */
+.tbn { position: absolute; left: 0; right: 0; bottom: 0; z-index: 9; font-family: var(--f-body); }
+.tbn-cta { display: grid; grid-template-columns: 1fr 1fr; height: 54px; }
+.tbn-cta a { display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-weight: 700; line-height: 1.2; }
+.tbn-cta svg { width: 24px; height: 24px; flex: none; }
+.tbn-cta small { display: block; font-size: 10px; font-weight: 500; }
+.tbn-cta span { font-size: 15px; letter-spacing: .04em; }
+.tbn-tel { background: var(--s-yellow); color: #3c3c3c; }
+.tbn-line { background: var(--s-line); color: #fff; }
+.tbn-bar { display: grid; grid-template-columns: repeat(5, 1fr); height: 62px; padding-bottom: 6px; background: var(--s-bar); backdrop-filter: blur(6px); }
+.tbn-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; color: #fff; text-decoration: none; font: 700 10.5px/1 var(--f-body); letter-spacing: .03em; background: none; border: 0; padding: 0; cursor: pointer; }
+.tbn-item svg { width: 24px; height: 24px; }
+.tbn-item.is-current { color: var(--s-yellow); }
+.tbn-item:focus-visible, .tbn-cta a:focus-visible { outline: 2px solid var(--s-yellow); outline-offset: -4px; }
+.tbn-item:active, .tbn-cta a:active { opacity: .65; }
+
+.sheet-ov { position: absolute; inset: 0; z-index: 10; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .25s; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 11; max-height: 78%; overflow-y: auto; padding: 12px 20px 28px; background: #fff; color: #333; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform .3s ease; }
+.screen.open .sheet-ov { opacity: 1; pointer-events: auto; }
+.screen.open .sheet { transform: translateY(0); }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; }
+.sheet-head p { margin: 0; font: 800 16px var(--f-disp); letter-spacing: .12em; }
+.sheet-close { width: 40px; height: 40px; border: 0; background: none; font-size: 28px; color: #666; cursor: pointer; }
+.sheet ul { list-style: none; margin: 0; padding: 0; }
+.sheet a { display: flex; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid #eee; color: #333; text-decoration: none; font-size: 15px; font-weight: 600; }
+.sheet a::after { content: "→"; color: #00a5c8; }
+
+.toast { position: absolute; left: 50%; bottom: 140px; translate: -50% 0; z-index: 20; background: rgba(20,20,20,.9); color: #fff; font-size: 12px; padding: 8px 14px; border-radius: 999px; white-space: nowrap; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+
+.screen.before .tbn, .screen.before .sheet, .screen.before .sheet-ov { display: none; }
+.screen.after .old-menu, .screen.after .old-bar { display: none; }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0,1fr); gap: 28px; padding-block: 24px 40px; }
+  .intro { position: static; }
+  .stage { display: grid; justify-items: center; }
+}
+@media (max-width: 440px) {
+  .phone { width: 100%; height: 760px; border-radius: 36px; padding: 8px; }
+  .screen { border-radius: 30px; }
+}
+@media (prefers-reduced-motion: reduce) { .sheet, .sheet-ov, .s-price-btn { transition: none; } }
+
+body { margin: 0; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <section class="intro">
+    <div class="eyebrow">高畑駅前接骨院 ／ スマホ表示 改修案</div>
+    <h1>右上のMENUを、<br>親指が届く下部ナビへ</h1>
+    <p class="lead">KOM DESIGN LAB. のレイアウトを参考にした仮想モックです。右のスマホ画面はスクロール・タップで実際に操作できます。</p>
+
+    <div class="toggle" role="group" aria-label="表示切替">
+      <button type="button" id="btn-before" aria-pressed="false">Before（現在）</button>
+      <button type="button" id="btn-after" aria-pressed="true">After（提案）</button>
+    </div>
+
+    <ul class="points">
+      <li><div class="k">1</div><div><b>予約導線を常時表示</b><span>電話（黄）とLINE（緑）を横並びにし、どのページでもワンタップで予約できます。</span></div></li>
+      <li><div class="k">2</div><div><b>アイコン＋小さい文字の5メニュー</b><span>ホーム／お客様の声／メニュー／ブログ／アクセス。表示中のページは黄色で強調します。</span></div></li>
+      <li><div class="k">3</div><div><b>全ページは中央「メニュー」に集約</b><span>旧ハンバーガーの中身は、下からせり上がる一覧で開きます。</span></div></li>
+    </ul>
+    <p class="hint">※画像・リンクは本番サイト（takabata-ekimae.com）のものをそのまま表示しています。リンクは新しいタブで実際のページが開きます。電話ボタンはモックのため発信しません。</p>
+  </section>
+
+  <div class="stage">
+    <div class="phone">
+      <div class="screen after" id="screen">
+        <div class="scroll" id="scroll">
+          <!-- #header -->
+          <p class="s-htext">名古屋市中川区高畑駅すぐ、プロを2,000人以上指導、キャリア25年、養成校講師、医者やリハ室長も推薦する高畑駅前接骨院です。各種保険・交通事故・労災取扱</p>
+          <header class="s-head">
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/h_img01.png" alt="" class="ri r-hic" loading="lazy"><a href="https://takabata-ekimae.com/" data-go="ホーム"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/logo.png" alt="高畑駅前接骨院" class="ri r-logo" loading="lazy"></a>
+          </header>
+          <div class="s-timebox">
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/time_left.png" alt="予約優先 052-665-6487" class="ri " loading="lazy">
+            <div class="s-tb-btns r-btns"><a href="https://line.me/R/ti/p/%40vqc5515s" data-go="LINE"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/btn_line.png" alt="LINEで予約" class="ri " loading="lazy"></a><a href="https://takabata-ekimae.com/access/" data-go="アクセス"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/btn_access.png" alt="アクセス" class="ri " loading="lazy"></a></div>
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/time_center.png" alt="受付時間" class="ri " loading="lazy">
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/time_right.png" alt="夜20時まで受付！" class="ri " loading="lazy">
+          </div>
+          <div class="r-hero"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_bg01.jpg" alt="" class="ri r-hero-bg" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/main_fixed01.png" alt="" class="ri r-hero-fix" loading="lazy"></div>
+          <nav class="s-gnav"><a href="#" data-go="ホーム">ホーム</a><a href="#" data-go="当院について">当院について</a><a href="#" data-go="施療の流れ">施療の流れ</a><a href="#" data-go="スタッフ">スタッフ</a><a href="#" data-go="メディア実績">メディア実績</a><a href="#" data-go="お客様の声">お客様の声</a><a href="#" data-go="採用情報">採用情報</a><a href="#" data-go="ブログ">ブログ</a><a href="#" data-go="アクセス">アクセス</a></nav>
+
+          <div class="s-pad"><a href="https://clinic.jiko24.jp/" data-go="交通事故病院"><img src="https://clinic.jiko24.jp/img/sugoude_banner/2022sugoude_banner3.png" alt="交通事故治療ができる整骨院案内なら「交通事故病院」" class="ri " loading="lazy"></a></div>
+
+          <!-- .features_area -->
+          <section class="s-sec alt">
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/title_features.png" alt="高畑駅前接骨院の6つの特徴！" class="ri r-title" loading="lazy">
+            <div class="s-grid2">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/features01-2.png" alt="総院長は祖父の代から3代目で柔道七段、プロ2,000人以上指導！" class="ri " loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/features02-2.png" alt="医者らやリハビリ室長、養成校講師から推薦！" class="ri " loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/features03.png" alt="書籍、雑誌、ラジオ出演など豊富なメディア実績！" class="ri " loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/features04.png" alt="口コミNo.1！" class="ri " loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/features05-2.png" alt="全員が国家資格保有者！" class="ri " loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/features06.png" alt="高畑駅すぐ！平日20時まで受付！近隣コインパーク無料！" class="ri " loading="lazy">
+            </div>
+          </section>
+          <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_bg01.jpg" alt="" class="ri r-wide" loading="lazy">
+
+          <!-- .license_area -->
+          <section class="s-sec">
+            <h2 class="s-h2">スタッフ全員が<br>国家資格保有者！</h2>
+            <div class="s-row"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/06/61ee85092af9394dee8815f873328fbe.jpg" alt="免許証" class="ri r-lic" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2023/11/0a99a6ca6d8e0ff16f33d6012f2107a7.png" alt="免許証" class="ri r-lic" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2023/11/c76924ab7e62b40cda81da861480e398.png" alt="免許証" class="ri r-lic" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/03/5868993fe64c1d042101c4c168bfe965-300x214.jpg" alt="免許証" class="ri r-lic" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/06/IMG_3046-300x213.jpeg" alt="免許証" class="ri r-lic" loading="lazy"></div>
+          </section>
+
+          <!-- .promise_area -->
+          <section class="s-sec alt">
+            <h2 class="s-h2">高畑駅前接骨院のお約束</h2>
+            <ol class="s-promise">
+              <li><b>1.</b>しっかりとカウンセリング、徒手検査をして「あなた」の状態を把握します</li>
+              <li><b>2.</b>「あなた」に合った施術をきちんと説明をしてから行います</li>
+              <li><b>3.</b>「あなた」の施術計画と自宅でのセルフケアを提供します</li>
+            </ol>
+            <a class="s-btn" href="#" data-go="施療の流れ">施療の流れへ</a>
+          </section>
+
+          <div class="s-banners">
+            <a href="#" data-go="電話発信 052-665-6487"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/banner_tel.png" alt="もう大丈夫ですよ！まずはお電話でご相談ください！" class="ri " loading="lazy"></a>
+            <a href="https://line.me/R/ti/p/%40vqc5515s" data-go="LINE"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/banner_line.png" alt="24時間いつでも受付！LINEで予約" class="ri " loading="lazy"></a>
+          </div>
+
+          <div class="s-loop"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_about01.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_about02.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_about03.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_about04.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_about05.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"></div>
+
+          <!-- .trouble_area -->
+          <section class="s-sec">
+            <h2 class="s-h2">こんなお悩みありませんか？</h2>
+            <div class="s-grid2 s-trouble">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_trouble01_pc.png" alt="朝腰が痛い…" class="ri r-trouble" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_trouble02_pc.png" alt="肩に痛みが" class="ri r-trouble" loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_trouble03.png" alt="膝の痛み" class="ri r-trouble" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_trouble04.png" alt="首、肩がつらい" class="ri r-trouble" loading="lazy">
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_trouble05.png" alt="異常なしといわれても痛む…" class="ri r-trouble" loading="lazy">
+            </div>
+          </section>
+
+          <!-- .allright_area -->
+          <section class="s-sec alt s-center">
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/title_allright.png" alt="安心してください、大丈夫ですよ！" class="ri r-title" loading="lazy">
+            <p>なぜなら<br>痛い箇所だけではなく、<br>当院はその原因である全身の状態を<br>把握してから施術しますので、<br>根本的に膝や腰、<br>肩の痛みは取れてきます。</p>
+          </section>
+
+          <!-- .reason_area -->
+          <section class="s-sec">
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_reason_title.png" alt="不調の理由は、日々の生活の中にある？" class="ri r-title" loading="lazy">
+            <p class="s-p">生活環境に人の体が痛む原因はあります。<br>立ち仕事で1日何時間も同じ姿勢でいたり、毎日のようにデスクに向かってパソコン、スマホに向かっていれば姿勢は前傾していき<b>クセのある方向に体は傾いてきます。</b></p>
+            <p class="s-p">姿勢改善と根本的な<b>痛みの原因が解消するために</b>体のクセを整えていき<b>痛みを出している患部の負担を軽減させる</b>ことができるのです。</p>
+            <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/kotsuban.png" alt="前傾した姿勢" class="ri r-mid" loading="lazy">
+          </section>
+
+          <div class="s-loop"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_operation01.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_operation02.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_operation03.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/i_operation04.png" alt="高畑駅前接骨院" class="ri r-loop" loading="lazy"></div>
+
+          <!-- .description_area -->
+          <section class="s-sec alt s-center">
+            <p>当院では首から足首までの<br>全身の筋肉を緩め、<br>身体の弾力性を取り戻します。<br>骨格は背骨の頸椎、<br>胸・腰椎、骨盤の順に整復し、<br>全身のバランス、姿勢を整えて、<br>正常な状態に戻してから<br>痛んでいる箇所の施術を行います。</p>
+            <p class="s-strong">これらの施術を<br>丁寧に行うことで、<br>痛みは取れていきます。</p>
+          </section>
+
+          <!-- .voice_area -->
+          <section class="s-sec" id="m-voice">
+            <div class="s-eng">VOICE</div>
+            <h2 class="s-h2">来院されたお客様の声</h2>
+            <div class="s-slider">
+              <div class="s-vcard"><div class="s-vhead">股関節の痛みが変わった!</div><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2025/03/IMG_1341-360x270.jpg" alt="" class="ri r-photo" loading="lazy"><span class="s-cat">股関節の痛み</span><b>女性</b><small>※得られる結果には個人差があります</small></div>
+              <div class="s-vcard"><div class="s-vhead">テニス肘が良くなった！</div><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2025/03/IMG_1748-360x270.jpg" alt="" class="ri r-photo" loading="lazy"><span class="s-cat">テニス肘</span><b>男性</b><small>※得られる結果には個人差があります</small></div>
+              <div class="s-vcard"><div class="s-vhead">首の痛みが楽になりました！</div><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2025/04/IMG_1344-360x270.jpg" alt="" class="ri r-photo" loading="lazy"><span class="s-cat">首・肩・肘</span><b>男性</b><small>※得られる結果には個人差があります</small></div>
+              <div class="s-vcard"><div class="s-vhead">インソールで驚くほど歩きやすくなった！</div><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2025/05/IMG_1802-360x270.jpg" alt="" class="ri r-photo" loading="lazy"><span class="s-cat">足</span><b>女性</b><small>※得られる結果には個人差があります</small></div>
+              <div class="s-vcard"><div class="s-vhead">腰の痛みが取れました！</div><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2025/05/IMG_1799-360x270.jpg" alt="" class="ri r-photo" loading="lazy"><span class="s-cat">腰痛</span><b>男性</b><small>※得られる結果には個人差があります</small></div>
+              <div class="s-vcard"><div class="s-vhead">予防が一番！！</div><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2025/05/IMG_0033-360x270.jpg" alt="" class="ri r-photo" loading="lazy"><span class="s-cat">首・肩・肘</span><b>男性</b><small>※得られる結果には個人差があります</small></div>
+            </div>
+            <a class="s-btn" href="#" data-go="お客様の声一覧">お客様の声一覧へ</a>
+          </section>
+
+          <!-- .common_symptom_area -->
+          <section class="s-sec alt">
+            <div class="s-symttl">症状別案内</div>
+            <dl class="s-sym">
+              <dt>腰</dt><dd><a href="#" data-go="坐骨神経痛">坐骨神経痛</a><a href="#" data-go="腰痛">腰痛</a><a href="#" data-go="産後骨盤">産後骨盤</a></dd>
+              <dt>足</dt><dd><a href="#" data-go="膝の痛み">膝の痛み</a><a href="#" data-go="股関節の痛み">股関節の痛み</a><a href="#" data-go="シンスプリント">シンスプリント</a><a href="#" data-go="足底筋膜炎">足底筋膜炎</a></dd>
+              <dt>首・肩・肘</dt><dd><a href="#" data-go="五十肩">五十肩</a><a href="#" data-go="首の痛み">首の痛み</a><a href="#" data-go="テニス肘">テニス肘</a></dd>
+            </dl>
+          </section>
+
+          <!-- .message_area -->
+          <section class="s-sec">
+            <div class="s-eng">MESSAGE</div>
+            <h2 class="s-h2">総院長 河原龍秀のあいさつ</h2>
+            <p class="s-p">私は祖父の代から柔道家（七段）で44年間、柔道をしてきましたが、ひざや腰、肩や首、肘手首、足首など、ありとあらゆるところを痛めてきました。<br>その度に祖父の開いた接骨院で母に施術してもらいよくしてきました。<br>よってお客様の気持ちは痛いほどよくわかります。<br>その私が現役引退後、祖父、母と同じく志した柔道整復師の道は国家資格を取得し修業後、柔道整復師養成専門学校の専任講師を20年間、その後、非常勤講師として5年間、計25年以上務めてプロ養成の指導にも携わってきましたが最も大切なことはお客様に寄り添い、お客様をゴールに導くプロセス（通院期間）にあります。<br>私たちと共に日々の生活に邁進しながら、痛みやしびれの原因となる筋肉の緊張や骨格のトラブルを解消していきましょう。<br>あなたが毎日を快適に過ごせることを心よりお祈り申し上げます。<br>総院長　河原 龍秀</p>
+          </section>
+
+          <!-- .recommend_area -->
+          <section class="s-sec alt">
+            <h2 class="s-h2">推薦者の声</h2>
+            <div class="s-slider">
+              <div class="s-rcard"><b class="s-rttl">自信を持って推薦します</b><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/05/ogura.jpg" alt="" class="ri r-photo" loading="lazy"><p>総院長の河原先生とは旧来の付き合いですが、常にお客様のことを親身に考え、医学的にも理にかなった施術のできる柔道整復師です。（以下略）</p><small>医療法人明照会 理事長　トータルサポートクリニック 院長<br><b>医師 小倉 行雄</b></small></div>
+              <div class="s-rcard"><b class="s-rttl">常にお客様のことを考えるお薦めの接骨院です</b><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/05/katagiri.jpg" alt="" class="ri r-photo" loading="lazy"><p>医療法人米田病院　リハビリテーション科の片桐幸秀と申します。（以下略）</p><small>特定医療法人 米田病院 リハビリテーション科 主査<br><b>柔道整復師 片桐幸秀さん</b></small></div>
+              <div class="s-rcard"><b class="s-rttl">包容力と細やかな気遣いを感じるお勧めの接骨院です</b><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/05/yoshida.jpg" alt="" class="ri r-photo" loading="lazy"><p>米田柔整専門学校で教員を務めている吉田剛章と申します。（以下略）</p><small>学校法人米田学園 米田柔整専門学校<br><b>柔整教員 吉田 剛章さん</b></small></div>
+            </div>
+          </section>
+
+          <!-- .staff_area -->
+          <section class="s-sec">
+            <h2 class="s-h2">スタッフ紹介</h2>
+            <div class="s-slider">
+              <div class="s-staff"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/05/220907_kawahara-270x270.jpg" alt="" class="ri r-staff" loading="lazy"><b>河原 龍秀</b><small>総院長 柔道整復師</small></div>
+              <div class="s-staff"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2023/12/411115550937752c2832347c65a5f6fe-1-270x270.png" alt="" class="ri r-staff" loading="lazy"><b>肥田 卓也</b><small>院長　柔道整復師</small></div>
+              <div class="s-staff"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/03/IMG_9489-e1774517181598-270x270.jpg" alt="" class="ri r-staff" loading="lazy"><b>宇野　弦汰</b><small>柔道整復師</small></div>
+              <div class="s-staff"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/04/IMG_9686-270x270.jpg" alt="" class="ri r-staff" loading="lazy"><b>古閑　将実</b><small>柔道整復師</small></div>
+            </div>
+            <a class="s-btn" href="#" data-go="スタッフ紹介一覧">スタッフ紹介一覧へ</a>
+          </section>
+
+          <!-- .difference_area -->
+          <section class="s-sec alt">
+            <div class="s-balloon">リピーターが多い理由。ココが違うんです！</div>
+            <h2 class="s-h2">高畑駅前接骨院と<br>他院の違い！</h2>
+            <div class="s-slider">
+              <div class="s-diff"><i>1</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference01.png" alt="" class="ri r-diff" loading="lazy"><b>痛みを体の根本から改善します！</b><div class="s-other"><span>他の接骨院・整骨院</span>聞いたらすぐお客様の痛いところの施術に入る所が多い</div><p>高畑駅前接骨院は痛みの原因を把握するためにお客様のお話をしっかりと聞き体の根本からの改善をしていきますので<mark>カウンセリングをしっかりとしています！</mark></p></div>
+              <div class="s-diff"><i>2</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference02.png" alt="" class="ri r-diff" loading="lazy"><b>一番良いお客様に合わせた方法を提供します！</b><div class="s-other"><span>他の接骨院・整骨院</span>ただ湿布を貼るだけ 電気をかけるだけの所が多い</div><p>1日でも早く楽になっていただきたいので、ただ痛みを和らげるでけの様な電気をあてて湿布を貼る<mark>だけで済ますことはしません。</mark></p></div>
+              <div class="s-diff"><i>3</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference03.png" alt="" class="ri r-diff" loading="lazy"><b>しっかりと痛みを深い箇所から施術します！</b><div class="s-other"><span>他の接骨院・整骨院</span>施術は痛いところのみしか行わない所が多い</div><p>当院<mark>独自のオリジナル整復法</mark>で根本的な原因である骨格のひずみを整える<mark>根本施術</mark>をご提供します！</p></div>
+              <div class="s-diff"><i>4</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference04.png" alt="" class="ri r-diff" loading="lazy"><b>納得されて施術するためにしっかりと説明します！</b><div class="s-other"><span>他の接骨院・整骨院</span>説明と簡単な検査だけですぐ施術に入る所が多い</div><p><mark>お客様に納得していただく</mark>ため痛みの原因をわかりやすい言葉と模型でお伝えし、<mark>最適な施術プランで</mark>施術いたします！</p></div>
+              <div class="s-diff"><i>5</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference05.png" alt="" class="ri r-diff" loading="lazy"><b>当院だけの整復法で改善します！</b><div class="s-other"><span>他の接骨院・整骨院</span>骨格のひずみは解消せずその場しのぎのマッサージだけのところが多い</div><p>深い部分の筋肉、からだの骨格のひずみを良い方向へ導き<mark>根本から改善します！</mark></p></div>
+              <div class="s-diff"><i>6</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference06.png" alt="" class="ri r-diff" loading="lazy"><b>待ち時間は予約制だからありません！</b><div class="s-other"><span>他の接骨院・整骨院</span>施術までの待ち時間が長い</div><p><mark>十分な施術時間を確保しています！</mark>お客様が通いやすいように<mark>予約制</mark>にすることで待ち時間なく施術をさせていただきます！</p></div>
+              <div class="s-diff"><i>7</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference07.png" alt="" class="ri r-diff" loading="lazy"><b>施術時は隣を気にせず受けられます！</b><div class="s-other"><span>他の接骨院・整骨院</span>隣のベッドとの間隔が窮屈で心からくつろげない</div><p>施術スペースは広く、必要に応じてカーテンのブースが設けてあります！<mark>隣のベッドとの間隔も広くしています！</mark></p></div>
+              <div class="s-diff"><i>8</i><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/difference08.png" alt="" class="ri r-diff" loading="lazy"><b>明るい外観で入りやすい！広い入口です！</b><div class="s-other"><span>他の接骨院・整骨院</span>院内が暗い、外から中の雰囲気がわかりにくく入りづらい</div><p>入り口も広く、1階で一面ガラス張りなので<mark>外から中の雰囲気がわかりやすく、初めてでも入りやすい</mark></p></div>
+            </div>
+          </section>
+
+          <div class="s-banners">
+            <a href="#" data-go="電話発信 052-665-6487"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/banner_tel.png" alt="もう大丈夫ですよ！まずはお電話でご相談ください！" class="ri " loading="lazy"></a>
+            <a href="https://line.me/R/ti/p/%40vqc5515s" data-go="LINE"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/banner_line.png" alt="24時間いつでも受付！LINEで予約" class="ri " loading="lazy"></a>
+          </div>
+
+          <!-- .movie_area -->
+          <section class="s-sec">
+            <h2 class="s-h2">MOVIE</h2>
+            <p class="s-center s-p">動画でご利用者様の声や施術方法など<br>わかりやすく解説！</p>
+            <div class="s-movies">
+              <div><a href="https://www.youtube.com/watch?v=KZceGntVBT4" data-go="YouTube" class="r-yt"><img src="https://i.ytimg.com/vi/KZceGntVBT4/hqdefault.jpg" alt="YouTube動画" class="ri " loading="lazy"></a><small>【肩こり解消ストレッチ】プロが教える「頭痛を治すには、肩こりを治しましょう！」</small></div>
+              <div><a href="https://www.youtube.com/watch?v=E-1i1MqMgWU" data-go="YouTube" class="r-yt"><img src="https://i.ytimg.com/vi/E-1i1MqMgWU/hqdefault.jpg" alt="YouTube動画" class="ri " loading="lazy"></a><small>【五十肩ストレッチ】プロが教える「五十肩でやってはいけないこと！」</small></div>
+              <div><a href="https://www.youtube.com/watch?v=I0AV94cjwqY" data-go="YouTube" class="r-yt"><img src="https://i.ytimg.com/vi/I0AV94cjwqY/hqdefault.jpg" alt="YouTube動画" class="ri " loading="lazy"></a><small>【股関節ストレッチ】プロが教える「膝が痛い方、それは股関節が原因かもしれません！」</small></div>
+              <div><a href="https://www.youtube.com/watch?v=mJneUf3EsjE" data-go="YouTube" class="r-yt"><img src="https://i.ytimg.com/vi/mJneUf3EsjE/hqdefault.jpg" alt="YouTube動画" class="ri " loading="lazy"></a><small>【反り腰ストレッチ】プロが教える「あなたの腰痛、反り腰が原因かもしれません！」</small></div>
+            </div>
+          </section>
+
+          <!-- .media_area -->
+          <section class="s-sec alt">
+            <h2 class="s-h2">メディア実績</h2>
+            <div class="s-slider">
+              <div class="s-media"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/04/media_2-150x170.jpg" alt="" class="ri r-book" loading="lazy"><small>発刊：2014.08.01</small><b>「頭痛改善するなら全国で有名なよりすぐりの施療院へ」 掲載</b></div>
+              <div class="s-media"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/04/media_3-150x170.jpg" alt="" class="ri r-book" loading="lazy"><small>発刊：2014.11.28</small><b>「セラピストの手帖」 一部解説担当</b></div>
+              <div class="s-media"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/04/media_1-150x170.jpg" alt="" class="ri r-book" loading="lazy"><small>発刊：2015.01.21</small><b>「病院に見放された痛みの９割は整骨院で完治する」 掲載</b></div>
+              <div class="s-media"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2017/05/20171107110038-0001-188x170.jpg" alt="" class="ri r-book" loading="lazy"><small>発刊：2017.04.20</small><b>東海ウォーカー2017年5月号 掲載</b></div>
+              <div class="s-media"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2018/04/1e96874a595576b41857e88b1c2bfb0c-188x170.jpg" alt="" class="ri r-book" loading="lazy"><small>発刊：2018.03.06</small><b>ラジオMID-FM76.1MHz「弁護士宇田幸生のリーガルあい」にて交通事故施療の相談対応、総院長出演</b></div>
+            </div>
+            <a class="s-btn" href="#" data-go="メディア実績一覧">メディア実績一覧へ</a>
+          </section>
+
+          <!-- .price_area -->
+          <section class="s-sec" id="m-price">
+            <h2 class="s-h2">施療料金の目安</h2>
+            <ul class="s-tags"><li>各種保険取扱</li><li>交通事故</li><li>労災取扱</li></ul>
+            <table class="s-price">
+              <tr><th>初回</th><td>450〜1,500円<small>程度</small></td></tr>
+              <tr><th>2回目以降</th><td>200〜950円<small>程度</small></td></tr>
+            </table>
+            <p class="s-note">※上記金額は目安です。自己負担の割合、痛めた箇所、施術内容、使用材料等により異なります</p>
+            <h3 class="s-h3">交通事故(自賠責)</h3>
+            <table class="s-price"><tr><th>施術</th><td>0円</td></tr></table>
+          </section>
+
+          <!-- .ps_area -->
+          <section class="s-sec alt s-center">
+            <h2 class="s-h2">追伸</h2>
+            <p class="s-ps">柔道整復師3代目でキャリア25年の<br>私がたどり着いた場所<br>それは「あなた」にとって“かけがえのない”接骨院<br>何か気になるとき「行ってみよう」<br>何か困ったとき「相談してみよう」<br>何かわからないとき「見てもらおう」<br>そんな接骨院が私の理想です<br>私も「何かあったとき」同じように<br>祖父の開いた接骨院で母に見てもらっていました<br>そのたびに丁寧に施術してもらっていたのを覚えています<br>何か「あなた」が困ったとき、気軽に相談できる“オアシス”で在りたい<br>そんな思いから「高畑駅前接骨院」を開院しました<br>心より「あなた」の来院をお待ちしています<br>総院長　河原 龍秀</p>
+          </section>
+
+          <div class="s-banners">
+            <a href="#" data-go="電話発信 052-665-6487"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/banner_tel.png" alt="もう大丈夫ですよ！まずはお電話でご相談ください！" class="ri " loading="lazy"></a>
+            <a href="https://line.me/R/ti/p/%40vqc5515s" data-go="LINE"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/banner_line.png" alt="24時間いつでも受付！LINEで予約" class="ri " loading="lazy"></a>
+          </div>
+
+          <!-- footer .blog_area -->
+          <section class="s-sec">
+            <h2 class="s-h2">BLOG</h2>
+            <p class="s-center s-p">高畑駅前接骨院の様子を日々更新しています！</p>
+            <div class="s-posts">
+              <a href="#" data-go="ブログ記事"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/10/636774558929518787-240x160.jpg" alt="" class="ri r-thumb" loading="lazy"><div><b>【足の痛み、浮腫み】靴下を脱ぐと跡がついている、スポーツした後にふくらはぎが痛む、寝ているときに足がつる方へのストレッチとケア方法！</b><small>2026.10.26　ピックアップ</small></div></a>
+              <a href="#" data-go="ブログ記事"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/10/IMG_2447-240x160.jpg" alt="" class="ri r-thumb" loading="lazy"><div><b>股関節が良くなりました！！</b><small>2026.10.12　施術について</small></div></a>
+              <a href="#" data-go="ブログ記事"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/10/IMG_202610051156090-240x160.png" alt="" class="ri r-thumb" loading="lazy"><div><b>【ふくらはぎの痛み～立っているだけでも痛い～】立つ時間が長くなると痛みや重だるさが出てくる。そんなふくらはぎの症状で悩まれている方へのストレッチ！</b><small>2026.10.05　ピックアップ</small></div></a>
+              <a href="#" data-go="ブログ記事"><img src="https://takabata-ekimae.com/blog/wp-content/uploads/2026/09/IMG_2358-240x160.jpeg" alt="" class="ri r-thumb" loading="lazy"><div><b>旅行が楽しくなりました！</b><small>2026.09.28　施術について</small></div></a>
+            </div>
+            <a class="s-btn" href="#" data-go="ブログ一覧">ブログ一覧へ</a>
+          </section>
+
+          <!-- .info_area -->
+          <section class="s-info">
+            <iframe class="r-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3262.625816905241!2d136.85054061283543!3d35.14101017265279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600377baa1ecb7c5%3A0x6edf00662f99ece3!2z6auY55WR6aeF5YmN5o6l6aqo6Zmi!5e0!3m2!1sja!2sjp!4v1776908133644!5m2!1sja!2sjp" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="地図"></iframe>
+            <div class="s-sec">
+              <div class="s-shop">高畑駅前接骨院</div>
+              <p>〒454-0911<br>名古屋市中川区高畑4-143 アネックス高畑1F</p>
+              <div class="s-contact"><span>ご予約・お問い合わせはこちらから</span><b>☎ 052-665-6487</b><small>✉ info@takabata-ekimae.com</small></div>
+              <img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/f_time.png" alt="受付時間" class="ri " loading="lazy">
+              <p class="s-note">ⓘ 土曜午前は~13時まで受付</p>
+            </div>
+          </section>
+
+          <!-- .series_area -->
+          <section class="s-sec alt">
+            <h2 class="s-h2">系列院のご案内</h2>
+            <div class="s-series"><span>名鉄《神宮前駅》東口からスグ！</span><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/logo_jingu.png" alt="神宮前駅東口接骨院" class="ri r-slogo" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/series01.jpg" alt="神宮前駅東口接骨院" class="ri r-sphoto" loading="lazy"><small>〒456-0032 名古屋市熱田区三本松町17-1 アムバーハウス神宮1F<br>TEL / 052-872-2850　定休日 / 日曜日<br>営業時間 / 9:00〜20:00（土・祝は17:00まで受付）</small></div>
+            <div class="s-series"><span>名古屋市営地下鉄東山線《新栄町駅》2番出口から徒歩5分！</span><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/logo_shinsakae.png" alt="新栄町接骨院" class="ri r-slogo" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/shinsakae01.jpg" alt="新栄町接骨院" class="ri r-sphoto" loading="lazy"><small>〒460-0007 名古屋市中区新栄2丁目5-3 ヒルズ新栄3号館1F<br>TEL / 052-228-4221　定休日 / 日曜日<br>営業時間 / 9:00〜20:00（土・祝は17:00まで受付）</small></div>
+            <div class="s-series"><span>名古屋市営バス《亀ヶ洞》から徒歩2分！</span><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/logo_tokushige.png" alt="徳重接骨院" class="ri r-slogo" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/tokushige01.jpg" alt="徳重接骨院" class="ri r-sphoto" loading="lazy"><small>〒458-0804 名古屋市緑区亀ヶ洞3-113ラフォーレ近藤103<br>TEL / 052-876-2983　定休日 / 日曜日（第2・第4水曜の午前）<br>営業時間 / 9:00〜12:00 / 16:00〜20:00（土・祝は9:00〜17:00）</small></div>
+            <div class="s-series"><span>名古屋駅太閤通口からから徒歩4分！</span><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/logo_meiekitaiko.svg" alt="名駅太閤接骨院" class="ri r-slogo" loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/meiekitaiko.jpg" alt="名駅太閤接骨院" class="ri r-sphoto" loading="lazy"><small>〒453-0015 名古屋市中村区椿町20-13NEUA MEIEKI 1F.A<br>TEL / 0120-758-452　定休日 / 日曜日<br>営業時間 / 11:00〜14:00 / 16:00〜20:00（土・祝は10:00〜13:00）</small></div>
+            <a href="https://therapist-jpn.com/recruit/" data-go="採用情報"><img src="https://therapist-jpn.com/img/recruit_banner_sp.jpg" alt="採用情報" class="ri " loading="lazy"></a>
+            <p class="s-center s-group">テラピスト接骨院グループ</p>
+          </section>
+          <div class="s-pad s-grid2"><a href="https://clinic.jiko24.jp/clinic-detail/takabataekimaenagoya/" data-go="交通事故病院"><img src="https://clinic.jiko24.jp/wp-content/themes/jiko24_v17/assets/img/share/bn_2.png" alt="交通事故病院" class="ri " loading="lazy"></a><a href="https://seikotsuguide.jp/clinic-detail/takabataekimaenagoya/" data-go="整骨ガイド"><img src="https://clinic.jiko24.jp/wp-content/themes/jiko24_v17/assets/img/share/gbn-1.png" alt="整骨ガイド" class="ri " loading="lazy"></a></div>
+          <nav class="s-fnav"><a href="#" data-go="ホーム">ホーム</a><a href="#" data-go="当院について">当院について</a><a href="#" data-go="施療の流れ">施療の流れ</a><a href="#" data-go="スタッフ">スタッフ</a><a href="#" data-go="メディア実績">メディア実績</a><a href="#" data-go="お客様の声">お客様の声</a><a href="#" data-go="採用情報">採用情報</a><a href="#" data-go="ブログ">ブログ</a><a href="#" data-go="アクセス">アクセス</a></nav>
+          <div class="s-foot">Copyright © 高畑駅前接骨院 All rights reserved.</div>
+        </div>
+
+        <a class="s-price-btn r-pricebtn" href="#m-price" data-go="料金の目安"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/link-price.svg" alt="料金目安" class="ri " loading="lazy"></a>
+
+        <!-- BEFORE -->
+        <div class="old-menu r-oldmenu" aria-hidden="true"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/panel_btn01.png" alt="MENU" class="ri " loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/panel_btn_access.png" alt="アクセス" class="ri " loading="lazy"></div>
+        <div class="old-bar r-oldbar" aria-hidden="true"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/sp_fixed_nav01.png" alt="ご予約・お問い合わせはコチラ" class="ri " loading="lazy"><img src="https://takabata-ekimae.com/blog/wp-content/themes/takabata_orijin/images/sp_fixed_nav02.png" alt="LINEで予約！" class="ri " loading="lazy"></div>
+
+        <!-- AFTER -->
+        <nav class="tbn" aria-label="スマホ用メニュー（提案）">
+          <div class="tbn-cta">
+            <a class="tbn-tel" href="#" data-go="電話発信 052-665-6487">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+              <div><small>予約優先・夜20時まで</small><span>電話で予約</span></div>
+            </a>
+            <a class="tbn-line" href="#" data-go="LINE公式アカウント">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5 1.1-.5 5.9-3.5 8.1-6C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
+              <div><small>24時間いつでも受付</small><span>LINEで予約</span></div>
+            </a>
+          </div>
+          <div class="tbn-bar">
+            <a class="tbn-item is-current" href="#" data-go="ホーム"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 2 11.5h3V21h5.5v-5h3v5H19v-9.5h3z"/></svg>ホーム</a>
+            <a class="tbn-item" href="#" data-go="お客様の声"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2zm3.5 6.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm4.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm4.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>お客様の声</a>
+            <button class="tbn-item" type="button" id="menu-btn" aria-expanded="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="5" width="18" height="2.4" rx="1.2"/><rect x="3" y="10.8" width="18" height="2.4" rx="1.2"/><rect x="3" y="16.6" width="18" height="2.4" rx="1.2"/></svg>メニュー</button>
+            <a class="tbn-item" href="#" data-go="ブログ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>ブログ</a>
+            <a class="tbn-item" href="#" data-go="アクセス"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>アクセス</a>
+          </div>
+        </nav>
+
+        <div class="sheet-ov" id="sheet-ov"></div>
+        <div class="sheet" role="dialog" aria-label="メニュー">
+          <div class="sheet-head"><p>MENU</p><button class="sheet-close" type="button" id="sheet-close" aria-label="閉じる">&times;</button></div>
+          <ul>
+            <li><a href="#" data-go="ホーム">ホーム</a></li>
+            <li><a href="#" data-go="当院について">当院について</a></li>
+            <li><a href="#" data-go="施療について">施療について</a></li>
+            <li><a href="#m-price" data-go="料金の目安">料金の目安</a></li>
+            <li><a href="#" data-go="スタッフ紹介">スタッフ紹介</a></li>
+            <li><a href="#" data-go="メディア実績">メディア実績</a></li>
+            <li><a href="#" data-go="お客様の声">お客様の声</a></li>
+            <li><a href="#" data-go="ブログ">ブログ</a></li>
+            <li><a href="#" data-go="アクセス">アクセス</a></li>
+            <li><a href="#" data-go="採用情報">採用情報</a></li>
+            <li><a href="#" data-go="Facebook">Facebook</a></li>
+          </ul>
+        </div>
+
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var S = 'https://takabata-ekimae.com/';
+  var URLS = {
+    'ホーム': S, '当院について': S + 'about/', '施療について': S + 'flow/', '施療の流れ': S + 'flow/',
+    'スタッフ紹介': S + 'staff/', 'スタッフ': S + 'staff/', 'スタッフ紹介一覧': S + 'staff/',
+    'メディア実績': S + 'media/', 'メディア実績一覧': S + 'media/',
+    'お客様の声': S + 'voice/', 'お客様の声一覧': S + 'voice/',
+    'ブログ': S + 'blog/', 'ブログ一覧': S + 'blog/', 'アクセス': S + 'access/',
+    '採用情報': 'https://therapist-jpn.com/recruit/', 'Facebook': 'https://www.facebook.com/takabataekimae/',
+    'LINE公式アカウント': 'https://line.me/R/ti/p/%40vqc5515s'
+  };
+  var screen = document.getElementById('screen');
+  var scroll = document.getElementById('scroll');
+  var toast = document.getElementById('toast');
+  var menuBtn = document.getElementById('menu-btn');
+  var bBefore = document.getElementById('btn-before');
+  var bAfter = document.getElementById('btn-after');
+  var t;
+
+  function show(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(t);
+    t = setTimeout(function () { toast.classList.remove('show'); }, 1600);
+  }
+  function setOpen(open) {
+    screen.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+  }
+  function mode(after) {
+    screen.classList.toggle('after', after);
+    screen.classList.toggle('before', !after);
+    bAfter.setAttribute('aria-pressed', after);
+    bBefore.setAttribute('aria-pressed', !after);
+    setOpen(false);
+  }
+
+  bBefore.addEventListener('click', function () { mode(false); });
+  bAfter.addEventListener('click', function () { mode(true); });
+  menuBtn.addEventListener('click', function () { setOpen(!screen.classList.contains('open')); });
+  document.getElementById('sheet-ov').addEventListener('click', function () { setOpen(false); });
+  document.getElementById('sheet-close').addEventListener('click', function () { setOpen(false); });
+
+  screen.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-go]');
+    if (!a) return;
+    e.preventDefault();
+    setOpen(false);
+    var href = a.getAttribute('href') || '';
+    var url = /^https?:/.test(href) ? href : URLS[a.dataset.go];
+    if (url) {
+      window.open(url, '_blank', 'noopener');
+      show('→ 「' + a.dataset.go + '」を新しいタブで開きます');
+      if (a.classList.contains('tbn-item')) {
+        screen.querySelectorAll('.tbn-item').forEach(function (i) { i.classList.remove('is-current'); });
+        a.classList.add('is-current');
+      }
+      return;
+    }
+    var target = href;
+    if (target && target.length > 1) {
+      var el = document.querySelector(target);
+      if (el) scroll.scrollTo({ top: el.offsetTop - 50, behavior: 'smooth' });
+      return;
+    }
+    show('→ 「' + a.dataset.go + '」へ移動します');
+    if (a.classList.contains('tbn-item')) {
+      screen.querySelectorAll('.tbn-item').forEach(function (i) { i.classList.remove('is-current'); });
+      a.classList.add('is-current');
+    }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  document.querySelectorAll('img.ri').forEach(function (im) {
+    function fail() {
+      var d = document.createElement('div');
+      d.className = 'ph r-fail ' + im.className.replace('ri', '');
+      d.textContent = im.alt || '画像';
+      im.replaceWith(d);
+    }
+    if (im.complete && im.naturalWidth === 0 && im.src) fail(); else im.addEventListener('error', fail);
+  });
+})();
+</script>
+</body>
+</html>
