@@ -1,153 +1,155 @@
 <!--
 ==========================================================================
-  スマホ用 下部固定ナビゲーション（KOM DESIGN LAB. 風レイアウト）
-  対象：https://takabata-ekimae.com/
+  高畑駅前接骨院 スマホ用 下部固定ナビ（KOM DESIGN LAB. 風レイアウト）
+  対象：https://takabata-ekimae.com/（テーマ：takabata_orijin）
 
-  ■ 使い方（WordPress の場合）
-    1. 下の <style>〜</script> までを丸ごとコピー
-    2. 「外観 → テーマファイルエディター → footer.php」の </body> 直前に貼り付け
-       （または「Insert Headers and Footers」系プラグインのフッター欄に貼り付け）
-    3. 【要編集】と書かれた箇所（リンク先・電話番号・文言）を実際の内容に置き換え
-    4. 既存ハンバーガーのクラス名が下の「既存ハンバーガーを隠す」の一覧に無ければ追記
+  ■ 設置方法
+    1. WordPress管理画面「外観 → テーマファイルエディター」
+    2. テーマ「takabata_orijin」の footer.php を開く
+    3. </body> の直前に、このファイルの <style>〜</script> を丸ごと貼り付け
+    ※ footer.php は全ページ共通なので、1か所の貼り付けで全ページに反映されます。
+    ※ 編集前に footer.php のバックアップを必ず取ってください。
 
-  ■ 表示ルール
-    ・画面幅 768px 以下（スマホ）だけ表示。PC表示は一切変わりません。
-    ・右上ハンバーガーは非表示にし、全ページへの導線は中央「メニュー」に集約。
+  ■ 変わること（スマホ表示のみ。PC表示は一切変わりません）
+    ・右上の MENU / アクセス ボタン（.panel_area）を非表示
+    ・既存の下部固定バナー（.sp_fixed_nav：電話／LINE画像）を非表示
+    ・代わりに「電話・LINEのCTA帯」＋「アイコン5つの下部メニュー」を表示
+    ・中央「メニュー」で全ページ一覧（旧ハンバーガーの中身）が下から開く
 ==========================================================================
 -->
 
 <style>
-  /* ---------- 色・サイズ（サイトのブランドカラーに合わせて変更可） ---------- */
+  /* ---------- 色・サイズ ---------- */
   :root {
-    --tbn-bar-bg: rgba(80, 80, 80, 0.94);  /* 下部バーの背景（KOM風ダークグレー） */
-    --tbn-bar-fg: #ffffff;                 /* アイコン・文字色 */
-    --tbn-cta-bg: #fff35c;                 /* CTA帯（KOM風イエロー） */
-    --tbn-cta-fg: #3c3c3c;
-    --tbn-badge: #e94c4c;                  /* 通知バッジ（赤丸） */
-    --tbn-bar-h: 64px;
-    --tbn-cta-h: 52px;
+    --tbn-bar-bg: rgba(80, 80, 80, 0.95);  /* 下部バー（KOM風ダークグレー） */
+    --tbn-bar-fg: #ffffff;
+    --tbn-tel-bg: #fff35c;                 /* 電話CTA（KOM風イエロー） */
+    --tbn-tel-fg: #3c3c3c;
+    --tbn-line-bg: #06c755;                /* LINE公式カラー */
+    --tbn-line-fg: #ffffff;
+    --tbn-accent: #00a5c8;
+    --tbn-bar-h: 60px;
+    --tbn-cta-h: 54px;
   }
 
   #tbn, #tbn-sheet, #tbn-overlay { display: none; }
 
-  @media (max-width: 768px) {
-    /* ---------- 既存ハンバーガーを隠す（テーマに合わせて追記可） ---------- */
-    .hamburger, .menu-toggle, .menu-trigger, .nav-toggle, .navbar-toggler,
-    .drawer-toggle, .drawer-hamburger, .c-hamburger, .l-header__menuBtn,
-    .p-header__menuBtn, .sp-menu-btn, .sp-nav-btn, .header-menu-btn,
-    #hamburger, #menu-toggle, #nav-toggle, #toggle, #js-hamburger {
-      display: none !important;
-    }
+  /* スマホ判定は JS で html に .tbn-sp を付与（このサイトは viewport 固定のため） */
+  html.tbn-sp .panel_area,
+  html.tbn-sp .sp_fixed_nav { display: none !important; }
 
-    /* 下部バーにコンテンツが隠れないよう余白を確保 */
-    body { padding-bottom: calc(var(--tbn-bar-h) + var(--tbn-cta-h) + env(safe-area-inset-bottom)) !important; }
+  html.tbn-sp body { padding-bottom: calc((var(--tbn-bar-h) + var(--tbn-cta-h)) * var(--tbn-zoom, 1) + env(safe-area-inset-bottom)) !important; }
 
-    #tbn {
-      display: block;
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9990;
-      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
-    }
+  /* 右下の「料金目安」丸ボタンがバーに重ならないよう持ち上げる */
+  html.tbn-sp .link-price { bottom: calc((var(--tbn-bar-h) + var(--tbn-cta-h) + 12px) * var(--tbn-zoom, 1)) !important; }
 
-    /* ---------- 上段：CTA帯 ---------- */
-    .tbn-cta {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      height: var(--tbn-cta-h);
-      background: var(--tbn-cta-bg); color: var(--tbn-cta-fg);
-      font-size: 17px; font-weight: 700; letter-spacing: .08em;
-      text-decoration: none;
-    }
-    .tbn-cta svg { width: 26px; height: 26px; flex: none; }
-
-    /* ---------- 下段：アイコン5つ ---------- */
-    .tbn-bar {
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      height: calc(var(--tbn-bar-h) + env(safe-area-inset-bottom));
-      padding-bottom: env(safe-area-inset-bottom);
-      background: var(--tbn-bar-bg);
-      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-    }
-    .tbn-item {
-      position: relative;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-      color: var(--tbn-bar-fg); text-decoration: none;
-      font-size: 11px; font-weight: 700; letter-spacing: .04em; line-height: 1;
-      background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .tbn-item:active { opacity: .6; }
-    .tbn-item svg { width: 26px; height: 26px; }
-    .tbn-badge {
-      position: absolute; top: 6px; left: calc(50% + 6px);
-      min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px;
-      background: var(--tbn-badge); color: #fff;
-      font-size: 11px; line-height: 18px; text-align: center;
-    }
-
-    /* ---------- 中央「メニュー」で開く全ページ一覧 ---------- */
-    #tbn-overlay {
-      display: block; position: fixed; inset: 0; z-index: 9991;
-      background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .25s;
-    }
-    #tbn-sheet {
-      display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 9992;
-      max-height: 80vh; overflow-y: auto;
-      padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
-      background: #fff; border-radius: 20px 20px 0 0;
-      transform: translateY(100%); transition: transform .3s ease;
-      font-family: inherit;
-    }
-    body.tbn-open #tbn-overlay { opacity: 1; pointer-events: auto; }
-    body.tbn-open #tbn-sheet { transform: translateY(0); }
-    body.tbn-open { overflow: hidden; }
-
-    .tbn-sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .tbn-sheet-head p { margin: 0; font-weight: 700; font-size: 16px; color: #333; }
-    .tbn-close { width: 40px; height: 40px; border: 0; background: none; font-size: 28px; color: #666; cursor: pointer; }
-    .tbn-sheet-list { list-style: none; margin: 0; padding: 0; }
-    .tbn-sheet-list a {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 4px; border-bottom: 1px solid #eee;
-      color: #333; text-decoration: none; font-size: 15px; font-weight: 600;
-    }
-    .tbn-sheet-list a::after { content: "→"; color: #00a5c8; }
+  html.tbn-sp #tbn {
+    display: block;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 9990;
+    zoom: var(--tbn-zoom, 1);
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
   }
+
+  /* ---------- 上段：電話／LINE の CTA 帯 ---------- */
+  .tbn-cta { display: grid; grid-template-columns: 1fr 1fr; height: var(--tbn-cta-h); }
+  .tbn-cta a {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none; font-weight: 700; line-height: 1.2;
+  }
+  .tbn-cta a:active { opacity: .75; }
+  .tbn-cta svg { width: 24px; height: 24px; flex: none; }
+  .tbn-cta small { display: block; font-size: 10px; font-weight: 600; letter-spacing: .02em; }
+  .tbn-cta span { font-size: 15px; letter-spacing: .04em; }
+  .tbn-cta .tbn-tel { background: var(--tbn-tel-bg); color: var(--tbn-tel-fg); }
+  .tbn-cta .tbn-line { background: var(--tbn-line-bg); color: var(--tbn-line-fg); }
+
+  /* ---------- 下段：アイコン5つ ---------- */
+  .tbn-bar {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    height: calc(var(--tbn-bar-h) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--tbn-bar-bg);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .tbn-item {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    color: var(--tbn-bar-fg) !important; text-decoration: none;
+    font-size: 11px; font-weight: 700; letter-spacing: .04em; line-height: 1;
+    background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tbn-item:active { opacity: .6; }
+  .tbn-item svg { width: 25px; height: 25px; }
+  .tbn-item.is-current { color: var(--tbn-tel-bg) !important; }
+
+  /* ---------- 中央「メニュー」で開く全ページ一覧 ---------- */
+  html.tbn-sp #tbn-overlay {
+    display: block; position: fixed; inset: 0; z-index: 9991;
+    background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  html.tbn-sp #tbn-sheet {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 9992;
+    zoom: var(--tbn-zoom, 1);
+    max-height: 80vh; overflow-y: auto;
+    padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
+    background: #fff; border-radius: 20px 20px 0 0;
+    transform: translateY(100%); transition: transform .3s ease;
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+  }
+  html.tbn-open #tbn-overlay { opacity: 1; pointer-events: auto; }
+  html.tbn-open #tbn-sheet { transform: translateY(0); }
+  html.tbn-open, html.tbn-open body { overflow: hidden; }
+
+  .tbn-sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .tbn-sheet-head p { margin: 0; font-weight: 700; font-size: 16px; color: #333; letter-spacing: .1em; }
+  .tbn-close { width: 40px; height: 40px; border: 0; background: none; font-size: 28px; color: #666; cursor: pointer; }
+  .tbn-sheet-list { list-style: none; margin: 0; padding: 0; }
+  .tbn-sheet-list a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 4px; border-bottom: 1px solid #eee;
+    color: #333 !important; text-decoration: none; font-size: 15px; font-weight: 600;
+  }
+  .tbn-sheet-list a::after { content: "→"; color: var(--tbn-accent); }
 </style>
 
 <!-- ======================= 下部固定ナビ ======================= -->
 <nav id="tbn" aria-label="スマホ用メニュー">
-  <!-- 上段CTA帯　【要編集】リンク先・文言 -->
-  <a class="tbn-cta" href="/contact/">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 5h20v14H2z" opacity=".15"/><path d="M2 5h20v14H2V5zm2 2v.5l8 5 8-5V7H4zm16 2.8-8 5-8-5V17h16V9.8z"/></svg>
-    WEB予約・お問い合わせ
-  </a>
+  <div class="tbn-cta">
+    <a class="tbn-tel" href="tel:0526656487">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+      <div><small>予約優先・夜20時まで</small><span>電話で予約</span></div>
+    </a>
+    <a class="tbn-line" href="https://line.me/R/ti/p/%40vqc5515s" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5 1.1-.5 5.9-3.5 8.1-6C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8zM8.2 13.3H6.3a.5.5 0 0 1-.5-.5V9a.5.5 0 0 1 1 0v3.3h1.4a.5.5 0 0 1 0 1zm2-.5a.5.5 0 0 1-1 0V9a.5.5 0 0 1 1 0zm4.6 0a.5.5 0 0 1-.9.3l-2-2.6v2.3a.5.5 0 0 1-1 0V9a.5.5 0 0 1 .9-.3l2 2.7V9a.5.5 0 0 1 1 0zm3-2.4a.5.5 0 0 1 0 1h-1.4v.9h1.4a.5.5 0 0 1 0 1h-1.9a.5.5 0 0 1-.5-.5V9a.5.5 0 0 1 .5-.5h1.9a.5.5 0 0 1 0 1h-1.4v.9z"/></svg>
+      <div><small>24時間いつでも受付</small><span>LINEで予約</span></div>
+    </a>
+  </div>
 
-  <!-- 下段アイコン5つ　【要編集】各 href と文言 -->
   <div class="tbn-bar">
-    <a class="tbn-item" href="/">
+    <a class="tbn-item" href="https://takabata-ekimae.com/">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 2 11.5h3V21h5.5v-5h3v5H19v-9.5h3z"/></svg>
       ホーム
     </a>
-    <a class="tbn-item" href="/news/">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>
-      お知らせ
-      <!-- 新着件数を出す場合のみ： <span class="tbn-badge">3</span> -->
+    <a class="tbn-item" href="https://takabata-ekimae.com/voice/">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2zm3.5 6.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm4.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm4.5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+      お客様の声
     </a>
     <button class="tbn-item" type="button" id="tbn-menu-btn" aria-controls="tbn-sheet" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="5" width="18" height="2.4" rx="1.2"/><rect x="3" y="10.8" width="18" height="2.4" rx="1.2"/><rect x="3" y="16.6" width="18" height="2.4" rx="1.2"/></svg>
       メニュー
     </button>
-    <a class="tbn-item" href="/access/">
+    <a class="tbn-item" href="https://takabata-ekimae.com/blog/">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>
+      ブログ
+    </a>
+    <a class="tbn-item" href="https://takabata-ekimae.com/access/">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
       アクセス
-    </a>
-    <a class="tbn-item" href="tel:000-0000-0000"><!-- 【要編集】電話番号 -->
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
-      電話
     </a>
   </div>
 </nav>
 
-<!-- 中央「メニュー」で開く全ページ一覧　【要編集】既存ハンバーガー内のリンクをここへ -->
+<!-- 中央「メニュー」の中身（旧ハンバーガー .panel_menu と同じ項目） -->
 <div id="tbn-overlay"></div>
 <div id="tbn-sheet" role="dialog" aria-modal="true" aria-label="メニュー" aria-hidden="true">
   <div class="tbn-sheet-head">
@@ -155,29 +157,53 @@
     <button class="tbn-close" type="button" aria-label="閉じる">&times;</button>
   </div>
   <ul class="tbn-sheet-list">
-    <li><a href="/">ホーム</a></li>
-    <li><a href="/about/">私たちについて</a></li>
-    <li><a href="/service/">サービス・料金</a></li>
-    <li><a href="/news/">お知らせ</a></li>
-    <li><a href="/access/">アクセス</a></li>
-    <li><a href="/contact/">お問い合わせ</a></li>
+    <li><a href="https://takabata-ekimae.com/">ホーム</a></li>
+    <li><a href="https://takabata-ekimae.com/about/">当院について</a></li>
+    <li><a href="https://takabata-ekimae.com/flow/">施療について</a></li>
+    <li><a href="https://takabata-ekimae.com/#price">料金の目安</a></li>
+    <li><a href="https://takabata-ekimae.com/staff/">スタッフ紹介</a></li>
+    <li><a href="https://takabata-ekimae.com/media/">メディア実績</a></li>
+    <li><a href="https://takabata-ekimae.com/voice/">お客様の声</a></li>
+    <li><a href="https://takabata-ekimae.com/blog/">ブログ</a></li>
+    <li><a href="https://takabata-ekimae.com/access/">アクセス</a></li>
+    <li><a href="https://therapist-jpn.com/recruit/" target="_blank" rel="noopener">採用情報</a></li>
+    <li><a href="https://www.facebook.com/takabataekimae/" target="_blank" rel="noopener">Facebook</a></li>
   </ul>
 </div>
 
 <script>
 (function () {
-  var body = document.body;
+  var html = document.documentElement;
+
+  // スマホ判定：画面幅 768px 以下の端末。
+  // このサイトは viewport が width=1024 固定の場合があるため、実画面幅との比率で文字・アイコンを等倍表示に補正する。
+  function detect() {
+    var sp = Math.min(screen.width, screen.height) <= 768 && window.matchMedia('(pointer: coarse)').matches;
+    html.classList.toggle('tbn-sp', sp);
+    var ratio = sp ? html.clientWidth / screen.width : 1;
+    html.style.setProperty('--tbn-zoom', ratio > 1.2 ? ratio.toFixed(3) : 1);
+  }
+  detect();
+  window.addEventListener('orientationchange', detect);
+
+  // 表示中のページのアイコンを強調
+  var path = location.pathname;
+  document.querySelectorAll('.tbn-item[href]').forEach(function (a) {
+    var p = new URL(a.href).pathname;
+    if (p === '/' ? path === '/' : path.indexOf(p) === 0) a.classList.add('is-current');
+  });
+
   var sheet = document.getElementById('tbn-sheet');
   var btn = document.getElementById('tbn-menu-btn');
-
   function setOpen(open) {
-    body.classList.toggle('tbn-open', open);
+    html.classList.toggle('tbn-open', open);
     btn.setAttribute('aria-expanded', open);
     sheet.setAttribute('aria-hidden', !open);
   }
-  btn.addEventListener('click', function () { setOpen(!body.classList.contains('tbn-open')); });
+  btn.addEventListener('click', function () { setOpen(!html.classList.contains('tbn-open')); });
   document.getElementById('tbn-overlay').addEventListener('click', function () { setOpen(false); });
   sheet.querySelector('.tbn-close').addEventListener('click', function () { setOpen(false); });
+  sheet.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
 })();
 </script>
